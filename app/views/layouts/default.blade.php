@@ -14,7 +14,7 @@
 <!-- Style -->
 <link rel="stylesheet" href="{{{ asset('css/bootstrap.min.css') }}}">
 <link rel="stylesheet" href="{{{ asset('css/bootstrap-theme.min.css') }}}">
-<link rel="stylesheet" href="{{{ asset('css/styles.css') }}}">
+<link rel="stylesheet" href="{{{ asset('css/style.css') }}}">
 
 <!-- Javascripts -->
 <script src="{{{ asset('js/jquery.min.js') }}}"></script>
@@ -44,7 +44,7 @@
 					url: urlBase+'/account/check',
 					type: 'POST',
 					dataType: 'JSON',
-					data: {value:value,type:'m'},
+					data: {value:value},
 					success: function(data){
 						if(data.value === true){
 							$("#email").css('border-color', 'green');
