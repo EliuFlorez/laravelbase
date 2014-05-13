@@ -13,7 +13,7 @@
 	<div class="collapse navbar-collapse" id="bs-navbar-collapse">
 		@if (Auth::check())
 			<ul class="nav navbar-nav">
-				<li class="{{{ (Request::is('account') ? 'active' : '') }}}"><a href="{{{ URL::to('posts') }}}">Inicio</a></li>
+				<li class="{{{ (Request::is('account') ? 'active' : '') }}}"><a href="{{{ URL::to('account') }}}">Inicio</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-avatar pull-right" style="padding-right:30px;">
 				<li class="dropdown">
