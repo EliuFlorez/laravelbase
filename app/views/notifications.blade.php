@@ -1,20 +1,20 @@
-@if (count($errors->all()) > 0)
+
+@if (count($errors) > 0)
 <div class="alert alert-error alert-block">
-	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	<h4>Error</h4>
-	Por favor verifique los datos
+	<strong>Whoops!</strong> There were some problems with your input.<br><br>
+	<ul>
+		@foreach ($errors->all() as $error)
+			<li>{{ $error }}</li>
+		@endforeach
+	</ul>
 </div>
 @endif
 
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
 	<a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
-	<strong>Listo:</strong>
-	@if(Session::get('success') == 'active-account')
-		Your account has been activated.
-	@else
-		{{{ $message }}}
-	@endif
+	<strong>Success:</strong>
+	{{{ $message }}}
 </div>
 @endif
 
@@ -22,11 +22,7 @@
 <div class="alert alert-danger">
 	<a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
 	<strong>Error:</strong>
-	@if(Session::get('error') == 'unactive-account')
-		Unexpected error occurred while activating your account.
-	@else
-		{{{ $message }}}
-	@endif
+	{{{ $message }}}
 </div>
 @endif
 
@@ -41,7 +37,7 @@
 @if ($message = Session::get('info'))
 <div class="alert alert-info">
 	<a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
-	<strong>Informacion:</strong>
+	<strong>Inform:</strong>
 	{{{ $message }}}
 </div>
 @endif

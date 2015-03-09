@@ -20,48 +20,6 @@
 <script src="{{{ asset('js/jquery.min.js') }}}"></script>
 <script src="{{{ asset('js/bootstrap.min.js') }}}"></script>
 
-<script type="text/javascript">
-	
-	var requests = 0;
-	var urlBase = "{{URL::action('HomeController@showIndex')}}";
-	var usersId = <?php echo (Auth::check()) ? Auth::user()->id : 0; ?>;
-	
-	$(function() {
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-	});
-	
-	$(document).ready(function(){
-		
-		$("#email").blur(function(){
-			$("#email").css('border-color', '');
-			var value = $("#email").val();
-			if(email.length >= 10){
-				$.ajax({
-					url: urlBase+'/account/check',
-					type: 'POST',
-					dataType: 'JSON',
-					data: {value:value},
-					success: function(data){
-						if(data.value === true){
-							$("#email").css('border-color', 'green');
-						} else {
-							$("#email").css('border-color', 'red');
-						}
-					},
-					error: function(xhr, textStatus, error){
-						$("#email").css('border-color', 'yellow');
-					}
-				});
-			}
-			return false;
-		});
-	});
-</script>
-
 </head>
 
 <body>

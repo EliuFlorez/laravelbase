@@ -2,7 +2,7 @@
 
 @section('title')
 @parent
-: Resetiar Contraseña
+: Remind
 @stop
 
 @section('content')

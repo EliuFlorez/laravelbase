@@ -6,25 +6,14 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 class User extends Eloquent implements UserInterface, RemindableInterface {
 	
 	/**
-	 * Primary Key
-	 */
-	protected $primaryKey = 'id';
-	
-	/**
 	 * Fillable columns
 	 */
-	protected $fillable = [
-		'id',
-		'name', 
-		'email'
-	];
+	protected $fillable = ['id', 'name', 'email'];
 	
 	/**
 	 * Guarded columns
 	 */
-	protected $guarded = [
-		'password'
-	];
+	protected $guarded = ['password', 'remember_token'];
 	
 	/**
 	 * The database table used by the model.
@@ -38,10 +27,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = [
-		'password'
-	];
-
+	protected $hidden = ['password', 'remember_token'];
+	
 	/**
 	 * Get the unique identifier for the user.
 	 *
@@ -51,7 +38,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->getKey();
 	}
-
+	
 	/**
 	 * Get the password for the user.
 	 *
@@ -61,7 +48,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->password;
 	}
-
+	
 	/**
 	 * Get the token value for the "remember me" session.
 	 *
@@ -71,7 +58,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->remember_token;
 	}
-
+	
 	/**
 	 * Set the token value for the "remember me" session.
 	 *
@@ -82,7 +69,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		$this->remember_token = $value;
 	}
-
+	
 	/**
 	 * Get the column name for the "remember me" token.
 	 *
@@ -102,46 +89,5 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->email;
 	}
-	
-	/*
-	** return string: the user's full name
-	*/
-	public function getFullName() {
-		return $this->name;
-	}
-	
-	/*
-	** Check for the Administrator role
-	** return bool
-	*/
-	public function isAdministrator() {
-		return $this->hasRole('Administrator');
-	}
 
-	/* 
-	** Checks if a user has a particular role
-	** string $role: The name of the role
-	** return bool 
-	*/
-	public function hasRole($role) {
-		$roles = $this->roles()->where('name', $role)->count();
-
-		return ($roles > 0);
-	}
-
-	/*
-	** Convert the tinyint to a true boolean for consistency
-	** return bool
-	*/
-	public function isEnabled() {
-		return ($this->enabled == 1);
-	}
-	
-	/**
-	 * Role relationship
-	 */
-	public function roles() {
-		return $this->belongsToMany('Roles', 'role_id');
-	}
-	
 }

@@ -11,64 +11,34 @@
 |
 */
 
-// Account
-Route::controller('account', 'AccountController' );
-
 // Guest
 Route::group(['before' => 'guest'], function()
 {
 	// Login
-    Route::get('/login', [
-        'as'   => 'account/login',
-        'uses' => 'AccountController@getLogin'
-    ]);
+    Route::get('/auth/login', 'AuthController@getLogin');
+	Route::post('/auth/login', 'AuthController@postLogin');
 	
-	Route::post('/login', [
-        'as'   => 'account/login',
-        'uses' => 'AccountController@postLogin'
-    ]);
-	
-	// Signup
-	Route::get('/register', [
-        'as'   => 'account/register',
-        'uses' => 'AccountController@getRegister'
-    ]);
-	
-	Route::post('/register', [
-        'as'   => 'account/register',
-        'uses' => 'AccountController@postRegister'
-    ]);
-	
-	// Activate account
-	Route::get('account/activate/{code}', [
-		'as'   => 'account/activate',
-		'uses' => 'AccountController@getActivate'
-	]);
+	// Register
+	Route::get('/auth/register', 'AuthController@getRegister');
+	Route::post('/auth/register', 'AuthController@postRegister');
 	
 	// Password
-	Route::controller('password', 'RemindersController');
-	
+	Route::controller('/auth/password', 'PasswordsController');
 });
 
 // Auth
 Route::group(['before' => 'auth'], function()
 {	
-	// Account
-    Route::get('/account', [
-        'as'   => 'account/index',
-        'uses' => 'AccountController@getIndex'
-    ]);
+	// Users
+    Route::get('/auth', 'AuthController@getIndex');
+    Route::get('/auth/setting', 'AuthController@getIndex');
+	Route::post('/auth/setting', 'AuthController@postIndex');
 	
-	Route::post('/account/setting', [
-        'as'   => 'account/setting',
-        'uses' => 'AccountController@postIndex'
-    ]);
+	// Account
+	Route::resource('accounts', 'AccountsController');
 	
 	// Logout
-    Route::get('logout', [
-        'as'   => 'account/logout',
-        'uses' => 'AccountController@getLogout'
-    ]);
+    Route::get('/auth/logout', 'AuthController@getLogout');
 });
 
 // Home

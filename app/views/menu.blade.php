@@ -13,7 +13,8 @@
 	<div class="collapse navbar-collapse" id="bs-navbar-collapse">
 		@if (Auth::check())
 			<ul class="nav navbar-nav">
-				<li class="{{{ (Request::is('account') ? 'active' : '') }}}"><a href="{{{ URL::to('account') }}}">Inicio</a></li>
+				<li class="{{{ (Request::is('auth') ? 'active' : '') }}}"><a href="{{{ URL::to('auth') }}}">Home</a></li>
+				<li class="{{{ (Request::is('accounts') ? 'active' : '') }}}"><a href="{{{ URL::to('accounts') }}}">Accounts</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-avatar pull-right" style="padding-right:30px;">
 				<li class="dropdown">
@@ -22,21 +23,21 @@
 						<b class="caret hidden-xs-only"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="{{{ URL::to('account') }}}">Configuracion</a></li>
-						<li><a href="{{{ URL::to('account') }}}">Perfil</a></li>
+						<li><a href="{{{ URL::to('auth') }}}">Setting</a></li>
+						<li><a href="{{{ URL::to('auth') }}}">Profile</a></li>
 						<li class="divider"></li>
-						<li><a href="{{{ URL::to('account/logout') }}}">Cerrar sesión</a></li>
+						<li><a href="{{{ URL::to('auth/logout') }}}">Logout</a></li>
 					</ul>
 				</li>
 			</ul>
 		@else
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="{{{ URL::to('') }}}">Inicio</a></li>
+				<li class="active"><a href="{{{ URL::to('') }}}">Home</a></li>
 			</ul>
 			<ul class="nav navbar-nav pull-right" style="padding-right:30px;">
-				<li><a class="{{{ (Request::is('account/register') ? 'active' : '') }}}" href="{{{ URL::to('account/register') }}}">Registrate!</a></li>
+				<li><a class="{{{ (Request::is('auth/login') ? 'active' : '') }}}" href="{{{ URL::to('auth/login') }}}">Login</a></li>
 				<li class="divider"></li>
-				<li><a class="{{{ (Request::is('account/login') ? 'active' : '') }}}" href="{{{ URL::to('account/login') }}}">Iniciar sesión</a></li>
+				<li><a class="{{{ (Request::is('auth/register') ? 'active' : '') }}}" href="{{{ URL::to('auth/register') }}}">Register</a></li>
 			</ul>
 		@endif
 	</div>

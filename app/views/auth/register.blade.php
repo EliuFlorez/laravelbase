@@ -2,22 +2,21 @@
 
 @section('title')
 @parent
-: Reset
+: Register
 @stop
 
 @section('content')
 	{{ Form::open(['class' => 'form-signin', 'autocomplete' => 'off']) }}
 		<div style="padding:15px;background-color:#fff;border-radius:6px;">
-			<h2 class="form-signin-heading text-center">Resetiar contraseña</h2>
+			<h2 class="form-signin-heading text-center">Registrate!</h2>
 			
-			@if (Session::has('error'))
-				<p style="color:red;">{{ Session::get('error') }}</p>
-			@endif
-			
-			<input type="hidden" name="token" value="{{{ $token }}}">
+			<div class="{{{ $errors->has('name') ? 'error' : '' }}}">
+				<input type="text" id="name" name="name" placeholder="Nombre.." required="true" autofocus="true" class="form-control" value="{{{ Input::old('name') }}}" />
+				{{{ $errors->first('name') }}}
+			</div>
 			
 			<div class="{{{ $errors->has('email') ? 'error' : '' }}}">
-				<input type="email" id="email" name="email" placeholder="Correo Electrónico.." required="true" autofocus="true" class="form-control inputs" value="{{{ Input::old('email') }}}" />
+				<input type="email" id="email" name="email" placeholder="Correo Electrónico.." required="true" class="form-control inputs" value="{{{ Input::old('email') }}}" />
 				{{{ $errors->first('email') }}}
 			</div>
 			
@@ -31,7 +30,13 @@
 				{{{ $errors->first('password_confirmation') }}}
 			</div>
 			
-			<button type="submit" class="btn btn-lg btn-primary btn-block">Resetiar contraseña</button>
+			<button type="submit" class="btn btn-lg btn-primary btn-block">Registrate!</button>
+			
+			<br/>
+			
+			<center>
+				<p><a href="{{{ URL::to('auth/login') }}}">Ya tiene una cuenta? inicia sesión</a></p>
+			</center>
 		</div>
-    {{ Form::close() }}
+	{{ Form::close() }}
 @stop

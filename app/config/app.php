@@ -120,6 +120,10 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+		// Security
+		'GrahamCampbell\Security\SecurityServiceProvider',
+        'GrahamCampbell\Binput\BinputServiceProvider',
+		
 	),
 
 	/*
@@ -186,6 +190,9 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
+		// Security Input
+		'Binput'          => 'GrahamCampbell\Binput\Facades\Binput',
+		
 	),
 
 );
