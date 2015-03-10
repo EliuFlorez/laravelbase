@@ -199,12 +199,12 @@ class AuthController extends AuthorizedController {
 			
 			// Save
 			$user->save();
-			/*
+			
 			// Email
-			$email = Mail::queue('emails.activate', ['name' => 'Welcome'], function($message) use ($user) {
+			$email = Mail::queue('emails.welcome', ['name' => 'Welcome'], function($message) use ($user) {
 				$message->to($user->email, $user->name)->subject('Hi Welcome');
 			});
-			*/
+			
 			// Redirect to the register page.
 			return Redirect::to('auth/login')->with('success', 'Account created with success!');
 		}
