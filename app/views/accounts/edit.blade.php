@@ -6,7 +6,7 @@
 @stop
 
 @section('content')
-	{{ Form::open(['route' => array('accounts.update', $account->id), 'method' => 'PUT', 'class' => 'form-style', 'autocomplete' => 'off']) }}
+	{{ Form::open(['route' => array('accounts.update', $account->id), 'method' => 'PUT', 'class' => 'form-style', 'files' => true, 'autocomplete' => 'off']) }}
 		<div style="padding:15px;background-color:#fff;border-radius:6px;">
 			<fieldset>
 				<h2 class="form-signin-heading text-center">Add Account</h2>
@@ -34,7 +34,15 @@
 					@endif
 					{{{ $errors->first('birth') }}}
 				</div>
-				<button type="submit" class="btn btn-lg btn-primary btn-block">Agregar</button>
+				<div class="form-group {{{ $errors->has('image') ? 'error' : '' }}}">
+					<label for="image">Image</label>
+					<input type="file" id="image" name="image" class="form-control" />
+					@if(!empty($account->image))
+						<img src="{{{ url($account->image) }}}" alt="image" width="180">
+					@endif
+					{{{ $errors->first('image') }}}
+				</div>
+				<button type="submit" class="btn btn-lg btn-primary btn-block">Update</button>
 			</fieldset>
 		</div>
 	{{ Form::close() }}

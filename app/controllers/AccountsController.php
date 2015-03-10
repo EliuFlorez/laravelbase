@@ -93,7 +93,13 @@ class AccountsController extends BaseController {
 		];
 		
 		// Get all the inputs.
-		$inputs = Binput::all();
+		$inputs = Input::all();
+		
+		// If we are updating the image.
+		if (Input::get('image'))
+		{
+			$rules['image'] = 'mimes:jpg,jpeg,gif,png|max:3000';
+		}
 		
 		// Validator
 		$validator = Validator::make($inputs, $rules);
@@ -113,6 +119,31 @@ class AccountsController extends BaseController {
 			$account->last_name  = Binput::get('last_name');
 			$account->phone      = Binput::get('phone');
 			$account->birth      = Binput::get('birth');
+			
+			// File image
+			if (Input::hasFile('image'))
+			{
+				// File
+				$file = Input::file('image');
+				
+				// If validation pass, get filename and extension
+				// Generate random (12 characters) string
+				// And specify a folder name of uploaded image
+				$fileName   = 'image_'.$userId;
+				$extension  = $file->getClientOriginalExtension();
+				$folderPath = 'uploads';
+				
+				// Full Name
+				$fileName = $fileName . '.' . $extension;
+				
+				// Move file to generated folder
+				$file->move($folderPath, $fileName);
+				
+				// Insert image information to database
+				$account->image = 'uploads/' . $fileName;
+			}
+			
+			// Save
 			$account->save();
 
 			// Redirect alert
@@ -201,6 +232,12 @@ class AccountsController extends BaseController {
 		// Get all the inputs.
 		$inputs = Binput::all();
 		
+		// If we are updating the image.
+		if (Input::get('image'))
+		{
+			$rules['image'] = 'mimes:jpg,jpeg,gif,png|max:3000';
+		}
+		
 		// Validator
 		$validator = Validator::make($inputs, $rules);
 		
@@ -222,6 +259,31 @@ class AccountsController extends BaseController {
 			$account->last_name  = Binput::get('last_name');
 			$account->phone      = Binput::get('phone');
 			$account->birth      = Binput::get('birth');
+			
+			// File image
+			if (Input::hasFile('image'))
+			{
+				// File
+				$file = Input::file('image');
+				
+				// If validation pass, get filename and extension
+				// Generate random (12 characters) string
+				// And specify a folder name of uploaded image
+				$fileName   = 'image_'.$userId;
+				$extension  = $file->getClientOriginalExtension();
+				$folderPath = 'uploads';
+				
+				// Full Name
+				$fileName = $fileName . '.' . $extension;
+				
+				// Move file to generated folder
+				$file->move($folderPath, $fileName);
+				
+				// Insert image information to database
+				$account->image = 'uploads/' . $fileName;
+			}
+			
+			// Save
 			$account->save();
 			
 			// Redirect alert
