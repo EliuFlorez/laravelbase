@@ -15,10 +15,18 @@
 <link rel="stylesheet" href="{{{ asset('css/bootstrap.min.css') }}}">
 <link rel="stylesheet" href="{{{ asset('css/bootstrap-theme.min.css') }}}">
 <link rel="stylesheet" href="{{{ asset('css/style.css') }}}">
+<link rel="stylesheet" href="{{{ asset('css/datepicker.css') }}}">
 
 <!-- Javascripts -->
 <script src="{{{ asset('js/jquery.min.js') }}}"></script>
 <script src="{{{ asset('js/bootstrap.min.js') }}}"></script>
+<script src="{{{ asset('js/bootstrap-datepicker.js') }}}"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#datepicker1').datepicker();
+	});
+</script>
 
 </head>
 
